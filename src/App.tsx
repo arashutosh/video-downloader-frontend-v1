@@ -27,7 +27,7 @@ function App() {
     <div className="min-h-screen bg-gradient-to-br from-blue-600 via-purple-600 to-blue-800">
       <div className="container mx-auto px-4 py-8">
         <Header />
-        
+
         <div className="max-w-4xl mx-auto space-y-8">
           {!videoData && !error && (
             <URLInput onSubmit={fetchVideoInfo} isLoading={isLoading} />
@@ -39,13 +39,13 @@ function App() {
 
           {videoData && (
             <>
-              <VideoInfo {...videoData} />
+              <VideoInfo {...videoData} videoId={videoData.videoId} url={videoData.url} />
               <FormatSelector
                 formats={formats}
                 onDownload={downloadFormat}
                 downloadingId={downloadingId}
               />
-              
+
               <div className="text-center">
                 <button
                   onClick={handleNewSearch}

@@ -6,6 +6,8 @@ interface VideoData {
   duration: string;
   views: string;
   channel: string;
+  videoId?: string;
+  url?: string;
 }
 
 interface Format {
@@ -50,6 +52,8 @@ export const useYouTubeDownloader = () => {
         duration: data.duration || '',
         views: data.views || '',
         channel: data.channel || '',
+        videoId: data.video_id || '',
+        url: lastUrlRef.current || '',
       });
       setFormats(
         (data.formats || []).map((f: any, idx: number) => ({
