@@ -27,6 +27,8 @@ export const useYouTubeDownloader = () => {
   const [error, setError] = useState<string | null>(null);
   const lastUrlRef = useRef<string | null>(null);
 
+  const backendUrl = import.meta.env.VITE_BACKEND_URL || 'http://localhost:5001';
+
   const fetchVideoInfo = async (url: string) => {
     setIsLoading(true);
     setError(null);
@@ -34,7 +36,7 @@ export const useYouTubeDownloader = () => {
     setFormats([]);
     lastUrlRef.current = url;
     try {
-      const response = await fetch('http://localhost:5001/api/download', {
+      const response = await fetch(`${backendUrl}/api/download`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -80,7 +82,7 @@ export const useYouTubeDownloader = () => {
       if (!formatObj) throw new Error('Format not found');
       const url = lastUrlRef.current;
       if (!url) throw new Error('No URL available for download.');
-      const downloadUrl = `http://localhost:5001/api/merge_download?url=${encodeURIComponent(url)}&format_id=${encodeURIComponent(formatId)}`;
+      const downloadUrl = `${backendUrl}/api/merge_download?url=${encodeURIComponent(url)}&format_id=${encodeURIComponent(formatId)}`;
       const a = document.createElement('a');
       a.href = downloadUrl;
       a.download = '';
