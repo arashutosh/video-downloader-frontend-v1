@@ -36,7 +36,7 @@ export const VideoInfo: React.FC<VideoInfoProps & { url?: string }> = ({
       if (!id) return;
       try {
         // Replace YOUR_API_KEY with a real YouTube Data API v3 key
-        const apiKey = 'AIzaSyCzPqPSog2Ob2hULTiKHdGxh4D65f9t_Sw';
+        const apiKey = process.env.REACT_APP_YOUTUBE_API_KEY;
         const resp = await fetch(
           `https://www.googleapis.com/youtube/v3/videos?part=statistics&id=${id}&key=${apiKey}`
         );
